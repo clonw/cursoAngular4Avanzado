@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModuloEmailModule} from './moduloemail/moduloemail.module';
 import { AdminModule} from './admin/admin.module';
 
-//Componentes
+// Componentes
 import { AppComponent } from './app.component';
 import { SimpleTinyComponent } from './components/simple-tiny/simple-tiny.component';
 import { TiendaComponent} from './components/tienda/tienda.component';
