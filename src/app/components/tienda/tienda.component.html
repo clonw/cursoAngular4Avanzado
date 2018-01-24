@@ -1,0 +1,84 @@
+<div class="col-lg-12" [@fadeIn]>
+<!--Utilizamos la @ para seleccionar la animación que queremos usar -->
+<a class="boton_acitvo btn btn-success"
+    [@marcar]="status" (click)="cambiarEstado(status)">
+    <!--<div *ngIf="status == 'active' then activo else inactivo">
+    </div>
+    <ng-template #activo>Botón Activo</ng-template>
+    <ng-template #inactivo>Botón inactivo</ng-template>-->
+    <span *ngIf="status == 'active'">Botón Activo</span>
+    <span *ngIf="status == 'inactive'">Botón inactivo</span>
+</a>
+
+<hr>
+<h4>Animaciones CC3</h4>
+<a class="boton_transiciones">Transiciones</a>
+
+<div class="clearfix">
+    
+</div>
+
+<div class="caja_animada">
+
+</div>
+
+<hr>
+
+<h4>Utilizar jquery dentro de angular</h4>
+<button id="botonjq">Mostrar textos</button>
+<p id="textojq" class="alert alert-warning">
+    This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or informatio.
+</p>
+
+<div id="caja" style="border:1px solid black; width: 150px; height:50px;">
+        This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or informatio.
+</div>
+
+<simple-tiny
+  [elementId]="'descripcionTienda'"
+  (onEditorKeyup)="textoRichEditor($event)"
+  >
+</simple-tiny>
+
+<hr>
+<h1>{{titulo}}</h1>
+Padre:
+<ul>
+    <li>Camiseta rosa</li>
+    <li>Gorra Negra</li>
+
+</ul>
+<hr/>
+<!--<input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()"/>-->
+Nombre del Parque:
+<input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()"/>
+<p>
+    Resultado: {{nombreDelParque}}
+</p>
+
+<div *ngIf="miParque">
+    <h4>Datos de mi parque desde el hijo</h4>
+    <ol>
+        <li>{{miParque.nombre}}</li>
+        <li>{{miParque.metros}}</li>
+        <li>{{miParque.abierto}}</li>
+        <li>{{miParque.vegetacion}}</li>
+    </ol>
+</div>
+
+<hr>
+<parques 
+        [nombre]="'nombreDelParque Por defecto'" 
+        [metros_cuadrados]="123"
+        (pasameLosDatos)="verDatosParque($event)"
+        ></parques>
+<hr>
+Hijo:
+<p *ngIf="nombreDelParque">
+    <parques 
+        [nombre]="nombreDelParque" 
+        [metros_cuadrados]="567"
+        (pasameLosDatos)="verDatosParque($event)"
+        ></parques>
+</p>
+</div>
