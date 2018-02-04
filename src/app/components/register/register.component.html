@@ -1,5 +1,9 @@
 <div class="col-lg-6">
     <h1>{{title}}</h1>
+    <div class="alert alert-success" *ngIf="message">
+        {{message}}
+    </div>
+
     <!-- #registerForm -> nombre. con el"ngForm" le decimos a angular que tiene que actuar sobre el. 
     "onSunmit()" -> es personalizable como quieras, aquí se ha elegido "onSunmit"
     -->

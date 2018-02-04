@@ -10,8 +10,9 @@ import {UserService } from '../../services/user.service';
     providers: [UserService]
 })
 export class RegisterComponent implements OnInit{
-    public title: String;
+    public title: string;
     public user: User;
+    public message: string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -19,15 +20,28 @@ export class RegisterComponent implements OnInit{
         private _userService: UserService
     ){
         this.title = 'Registro';
-        this.user = new User('', '', '', '', 'ROLE_USER', '');
+        this.user = new User('', '', '', '', '', 'ROLE_USER', '');
     }
 
     ngOnInit(){
         console.log('register.component cargado!!');
-        console.log(this._userService.register);
     }
 
     onSubmit(){
-        console.log(this.user);
+        this._userService.register(this.user).subscribe(
+            response => {
+                if (response.user._id){
+                    //con esto los datos ue nos devuelva el servicio se me guarden en el objeto usuario
+                    this.user = response.user;
+                    this.message = 'El registro se ha realizado correctamante, identificate con ' + this.user.email;
+                }else {
+                    this.user = new User('', '', '', '', '', 'ROLE_USER', '');
+                    this.message = 'Error al registrarse';
+                }
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
     }
 }
