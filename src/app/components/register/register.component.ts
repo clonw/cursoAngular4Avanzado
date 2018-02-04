@@ -12,7 +12,7 @@ import {UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit{
     public title: string;
     public user: User;
-    public message: string;
+    public status: string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -30,13 +30,11 @@ export class RegisterComponent implements OnInit{
     onSubmit(){
         this._userService.register(this.user).subscribe(
             response => {
-                if (response.user._id){
-                    //con esto los datos ue nos devuelva el servicio se me guarden en el objeto usuario
-                    this.user = response.user;
-                    this.message = 'El registro se ha realizado correctamante, identificate con ' + this.user.email;
-                }else {
+                if (response.user && response.user._id){
+                    this.status = 'success';
                     this.user = new User('', '', '', '', '', 'ROLE_USER', '');
-                    this.message = 'Error al registrarse';
+                }else {
+                    this.status = 'error';
                 }
             },
             error => {

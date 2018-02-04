@@ -1,9 +1,11 @@
 <div class="col-lg-6">
     <h1>{{title}}</h1>
-    <div class="alert alert-success" *ngIf="message">
-        {{message}}
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Registro completado correctamnete, <a [routerLink]="['/login']">Identificate aquí</a>
     </div>
-
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        No te has registrado  correctamnete.
+    </div>
     <!-- #registerForm -> nombre. con el"ngForm" le decimos a angular que tiene que actuar sobre el. 
     "onSunmit()" -> es personalizable como quieras, aquí se ha elegido "onSunmit"
     -->
