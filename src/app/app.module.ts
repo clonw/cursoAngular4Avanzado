@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing, appRoutingProviders} from './app.routing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
 
 // importar nuestro nuevo módulo
 import { ModuloEmailModule} from './moduloemail/moduloemail.module';
@@ -19,6 +20,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { LoginComponent } from './components/login/login.component';
     routing,
     ModuloEmailModule,
     AdminModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
