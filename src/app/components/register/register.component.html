@@ -9,7 +9,7 @@
     <!-- #registerForm -> nombre. con el"ngForm" le decimos a angular que tiene que actuar sobre el. 
     "onSunmit()" -> es personalizable como quieras, aquí se ha elegido "onSunmit"
     -->
-    <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-10">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">
         <p>
             <label>Nombre</label>
             <!-- Con la # le damos un nomrbe al campo p.e. "name". el ngModel es para que pueda trabajar con la validacion del campo para que haga tobidatabingo

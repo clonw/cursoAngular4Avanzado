@@ -25,14 +25,16 @@ export class RegisterComponent implements OnInit{
 
     ngOnInit(){
         console.log('register.component cargado!!');
+        console.log('Email: ' + this.user.email);
     }
 
-    onSubmit(){
+    onSubmit(registerForm){
         this._userService.register(this.user).subscribe(
             response => {
                 if (response.user && response.user._id){
                     this.status = 'success';
                     this.user = new User('', '', '', '', '', 'ROLE_USER', '');
+                    registerForm.reset();
                 }else {
                     this.status = 'error';
                 }
