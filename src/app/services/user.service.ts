@@ -9,6 +9,9 @@ import { GLOBAL} from './global';
 @Injectable()
 export class UserService{
     public url: string;
+    public identity;
+    public token;
+
     constructor(private _http: Http){
         this.url = GLOBAL.url;
     }
@@ -36,5 +39,15 @@ export class UserService{
         //Peticion AJAX
         //Con el map capturamos la respuesta del API
         return this._http.post(this.url + 'login', params, {headers: headers}).map(res => res.json());
+    }
+
+    getIdentity(){
+        let identity = JSON.parse(localStorage.getItem('identity'));
+
+        if (identity != 'undefined'){
+            this.identity = identity;
+        } else {
+            this.identity = null;
+        }
     }
 }

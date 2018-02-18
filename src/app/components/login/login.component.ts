@@ -39,18 +39,16 @@ export class LoginComponent implements OnInit{
                     alert('El usuario no se ha logueado corrctamente');
                 } else {
                     this.identity.password = '';
-                     //Mostrar el identity, que es el objeto del usuario
-                     console.log(this.identity);
-                    //Conseguir el token
+                    localStorage.setItem('identity', JSON.stringify(this.identity));
+                    // Conseguir el token
                     this._userService.signup( this.user, 'true').subscribe(
-                        response =>{
+                        response => {
                             this.token = response.token;
-            
+
                             if (this.token.length <= 0){
                                 alert('El token no se ha generado');
                             } else {
-                                //Mostrar el token
-                                console.log(this.token);
+                                localStorage.setItem('token', this.token);
                                 this.status = 'success';
                             }
                         },
