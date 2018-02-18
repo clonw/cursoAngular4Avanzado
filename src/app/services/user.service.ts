@@ -21,4 +21,20 @@ export class UserService{
         return this._http.post(this.url + 'register', params, {headers: headers})
                         .map(res => res.json());
     }
+
+    //gettoken = null esto quiere decir que gettoken por defecto irá a null
+    //gettoken será un boolean que informaremos desde login.component para querer obtener el token una vez el user
+    //esté logueado
+    signup(user_to_login, gettoken = null){
+        if(gettoken != null){
+            user_to_login.gettoken = gettoken;
+        }
+
+        let params = JSON.stringify(user_to_login);
+        let headers = new Headers({ 'Content-Type': 'application/json'});
+
+        //Peticion AJAX
+        //Con el map capturamos la respuesta del API
+        return this._http.post(this.url + 'login', params, {headers: headers}).map(res => res.json());
+    }
 }
