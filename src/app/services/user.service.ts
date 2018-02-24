@@ -17,37 +17,50 @@ export class UserService{
     }
 
     register( user_to_register){
-        let params = JSON.stringify(user_to_register);
-        let headers = new Headers({ 'Content-Type': 'application/json'});
+        const params = JSON.stringify(user_to_register);
+        const headers = new Headers({ 'Content-Type': 'application/json'});
 
-        //Peticion AJAX
+        // Peticion AJAX
         return this._http.post(this.url + 'register', params, {headers: headers})
                         .map(res => res.json());
     }
 
-    //gettoken = null esto quiere decir que gettoken por defecto irá a null
-    //gettoken será un boolean que informaremos desde login.component para querer obtener el token una vez el user
-    //esté logueado
+    // gettoken = null esto quiere decir que gettoken por defecto irá a null
+    // gettoken será un boolean que informaremos desde login.component para querer obtener el token una vez el user
+    // esté logueado
     signup(user_to_login, gettoken = null){
-        if(gettoken != null){
+        if (gettoken != null){
             user_to_login.gettoken = gettoken;
         }
 
-        let params = JSON.stringify(user_to_login);
-        let headers = new Headers({ 'Content-Type': 'application/json'});
+        const params = JSON.stringify(user_to_login);
+        const headers = new Headers({ 'Content-Type': 'application/json'});
 
-        //Peticion AJAX
-        //Con el map capturamos la respuesta del API
+        // Peticion AJAX
+        // Con el map capturamos la respuesta del API
         return this._http.post(this.url + 'login', params, {headers: headers}).map(res => res.json());
     }
 
     getIdentity(){
-        let identity = JSON.parse(localStorage.getItem('identity'));
+        const identity = JSON.parse(localStorage.getItem('identity'));
 
         if (identity != 'undefined'){
             this.identity = identity;
         } else {
             this.identity = null;
         }
+
+        return this.identity;
+    }
+
+    getToken(){
+        let token = localStorage.getItem('token');
+
+        if ( token != 'undefined'){
+            this.token = token;
+        } else {
+            this.token = null;
+        }
+        return this.token;
     }
 }

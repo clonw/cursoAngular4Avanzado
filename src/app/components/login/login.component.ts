@@ -27,12 +27,14 @@ export class LoginComponent implements OnInit{
 
     ngOnInit(){
         console.log('login.component cargado!!');
+        console.log(this._userService.getIdentity());
+        console.log(this._userService.getToken());
     }
 
     onSubmit(){
-        //Loguear al usuario y conseguir el objeto en limpio
+        // Loguear al usuario y conseguir el objeto en limpio
         this._userService.signup( this.user).subscribe(
-            response =>{
+            response => {
                 this.identity = response.user;
 
                 if (!this.identity || !this.identity._id){
@@ -50,6 +52,8 @@ export class LoginComponent implements OnInit{
                             } else {
                                 localStorage.setItem('token', this.token);
                                 this.status = 'success';
+
+                                this._router.navigate(['/']);
                             }
                         },
                         error => {
@@ -59,10 +63,10 @@ export class LoginComponent implements OnInit{
                 }
             },
             error => {
-                var errorMessage = <any> error;
+                let errorMessage = <any> error;
 
-                if( errorMessage != null){
-                    var body = JSON.parse(error._body);
+                if ( errorMessage != null){
+                    let body = JSON.parse(error._body);
                     this.status = 'error';
                 }
             }
