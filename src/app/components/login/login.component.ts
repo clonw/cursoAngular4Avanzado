@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit{
                 }
             },
             error => {
-                let errorMessage = <any> error;
+                const errorMessage = <any> error;
 
                 if ( errorMessage != null){
                     let body = JSON.parse(error._body);
