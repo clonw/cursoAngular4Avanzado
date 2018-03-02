@@ -17,6 +17,7 @@ export class UserEditComponent implements OnInit{
     public user: User;
     public identity;
     public token;
+    public status;
 
     constructor(
         private _userService: UserService
@@ -29,5 +30,28 @@ export class UserEditComponent implements OnInit{
 
     ngOnInit(): void {
        console.log('user-edit.component.ts cargado!!!');
+    }
+
+    onSubmit(){
+        this._userService.updateUser( this.user).subscribe(
+            response => {
+                if (!response.user){
+                    console.log('Primer error');
+                    this.status = 'error';
+                } else {
+                    this.status = 'success';
+                    localStorage.setItem('identity', JSON.stringify(this.user));
+
+                    // Subida de la imagen
+                }
+            },
+            error => {
+                console.log('segundo error');
+                var errorMessage = <any>error;
+                if (errorMessage != null){
+                    this.status = 'error';
+                }
+            }
+        );
     }
 }
