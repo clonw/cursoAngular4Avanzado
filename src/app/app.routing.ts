@@ -10,6 +10,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -21,6 +23,7 @@ const appRoutes: Routes = [
     {path: 'cuidadores', component: KeepersComponent},
     {path: 'registro', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'mis-datos', component: UserEditComponent},
     {path: '**', component: HomeComponent}
 ];
 

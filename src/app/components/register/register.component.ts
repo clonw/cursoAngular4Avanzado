@@ -5,6 +5,7 @@ import {GLOBAL} from '../../services/global';
 import {UserService } from '../../services/user.service';
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'register',
     templateUrl: './register.component.html',
     providers: [UserService]
