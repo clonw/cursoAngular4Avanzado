@@ -44,6 +44,7 @@ export class UserService{
     getIdentity(){
         const identity = JSON.parse(localStorage.getItem('identity'));
 
+        // tslint:disable-next-line:triple-equals
         if (identity != 'undefined'){
             this.identity = identity;
         } else {
@@ -54,8 +55,9 @@ export class UserService{
     }
 
     getToken(){
-        let token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
 
+        // tslint:disable-next-line:triple-equals
         if ( token != 'undefined'){
             this.token = token;
         } else {
