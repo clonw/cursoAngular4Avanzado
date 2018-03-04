@@ -34,6 +34,10 @@
             </span>
         </p>
         
+        <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+            <img src="{{ url + 'get-image-file/' + user.image}}"/>
+        </div>
+
         <p>
             <label>Sube tu avatar</label>
             <input type="file" placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
