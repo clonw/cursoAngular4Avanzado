@@ -1,0 +1,49 @@
+<div class="col-lg-6">
+    <h1>{{title}}</h1>
+    <div class="alert alert-success" *ngIf="status == 'success'">
+       Has actualizado tu información correctamente
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        No te has actualizado tus datos.
+    </div>
+    <!-- #registerForm -> nombre. con el"ngForm" le decimos a angular que tiene que actuar sobre el. 
+    "onSunmit()" -> es personalizable como quieras, aquí se ha elegido "onSunmit"
+    -->
+    <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-10">
+        <p>
+            <label>Nombre</label>
+            <!-- Con la # le damos un nomrbe al campo p.e. "name". el ngModel es para que pueda trabajar con la validacion del campo para que haga tobidatabingo
+            [(ngModel)]="user.name" enlaza el componente con la vista accedemos al objeto user del componente-->
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class = "form-control" required />
+            <span *ngIf="!name.valid && name.touched">
+                El nombre es obligatorio
+            </span>
+        </p>
+        <p>
+            <label>Apellidos</label>
+            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class = "form-control" required />
+            <span *ngIf="!surname.valid && surname.touched">
+                El apellido es obligatorio
+            </span>
+        </p>
+        <p>
+            <label>Email</label>
+            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class = "form-control" required />
+            <span *ngIf="!email.valid && email.touched">
+                El email es obligatorio
+            </span>
+        </p>
+        
+        <div class="image_for_edit" *ngIf="user.image && user.image != 'null'">
+            <img src="{{ url + 'get-image-file/' + user.image}}"/>
+        </div>
+
+        <p>
+            <label>Sube tu avatar</label>
+            <input type="file" placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
+        </p>
+
+        <!--[disable]="!registerForm.valid" esto nos permite aplicar la propiedad disable al botón cuando el formulario no sea válido -->
+        <input type="submit" value="{{title}}" class="btn btn-primary" [disabled]="!userEditForm.valid" />
+    </form>
+</div>

@@ -1,3 +1,6 @@
+.pointer{
+    cursor: pointer;
+}
 .navigation.col-lg-12{
     margin-top: 10px;
 }
@@ -6,11 +9,17 @@
     border-radius: 5px;
     box-shadow: 2px 2px 1px #ccc;
 }
+/*El !importan me hace que sea mas especifico */
 .navbar-nav .active{
-   border-bottom: 3px solid orange;
+   border-bottom: 3px solid orange !important;
 }
+/* Ponemos el transparen para que no cambie de tamaño los menus cuando pasamos de uno a otro*/
+.navbar-default .navbar-nav>li>a{
+    transition: all 300ms;
+    border-bottom: 3px solid transparent;
+ }
 
-.navbar-default .navbar-nav>li>a:hover{
+ .navbar-default .navbar-nav>li>a:hover{
     transition: all 300ms;
     border-bottom: 3px solid orange;
  }
@@ -24,6 +33,22 @@
     transition: boder 2s, background 5s, border-radius 500ms;
     display: block;
     width: 100px;
+}
+
+.image_for_edit img{
+    width: 60px;
+}
+
+.avatar{
+    width: 35px;
+    height: 35px;
+    border-radius: 700px;
+    overflow: hidden;
+    margin-top: 9px;
+    margin-right: 2px;
+}
+.avatar img{
+    height: 35px;
 }
 
 .boton_transiciones:hover{
