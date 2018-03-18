@@ -20,13 +20,15 @@ export class AddComponent implements OnInit{
   public identity;
   public token;
   public url: string;
+  public status;
 
   constructor(
 
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
-    private _uploadService: UploadService
+    private _uploadService: UploadService,
+    private _animalService: AnimalService
   ){
     this.title = 'Añadir';
     this.animal = new Animal('', '', 2017, '', '');
@@ -37,5 +39,17 @@ export class AddComponent implements OnInit{
 
   ngOnInit(){
     console.log('animal -addc componente ha sido cargado !!');
+  }
+
+  onSubmit(){
+    console.log( this.animal);
+    this._animalService.addAnimal(this.token, this.animal).subscribe(
+      response => {
+
+      },
+      error => {
+        var errorMessage =  <any>error;
+      }
+    );
   }
 }
