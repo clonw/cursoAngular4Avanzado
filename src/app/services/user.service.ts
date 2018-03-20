@@ -16,6 +16,10 @@ export class UserService{
         this.url = GLOBAL.url;
     }
 
+    test(){
+      return this._http.get('https://angular4backend.herokuapp.com/probando').map(res => res.json());;
+    }
+  
     register( user_to_register){
         const params = JSON.stringify(user_to_register);
         const headers = new Headers({ 'Content-Type': 'application/json'});
