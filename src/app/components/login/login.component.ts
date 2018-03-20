@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit{
                     let body = JSON.parse(error._body);
                     this.status = 'error';
                 }
-            }):
+            });
   }
 
 }
