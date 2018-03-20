@@ -72,5 +72,19 @@ export class LoginComponent implements OnInit{
             }
         );
     }
+  test(){
+    this._userService.test().subscribe(
+     response => {
+       console.log(response);
+    },
+            error => {
+                const errorMessage = <any> error;
+
+                if ( errorMessage != null){
+                    let body = JSON.parse(error._body);
+                    this.status = 'error';
+                }
+            }):
+  }
 
 }
