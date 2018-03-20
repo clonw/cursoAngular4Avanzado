@@ -17,7 +17,7 @@ export class UserService{
     }
 
     test(){
-      return this._http.get('https://angular4backend.herokuapp.com/probando').map(res => res.json());;
+      return this._http.get('https://cursoangular4backed.herokuapp.com/probando').map(res => res.json());;
     }
   
     register( user_to_register){
