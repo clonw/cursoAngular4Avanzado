@@ -45,10 +45,22 @@ export class AddComponent implements OnInit{
     console.log( this.animal);
     this._animalService.addAnimal(this.token, this.animal).subscribe(
       response => {
+        if (!response.animal){
+            this.status = 'error';
+        } else {
+          this.status = 'success';
+          this.animal = response.animal;
 
+          // Subir imagen del animal
+          this._router.navigate(['/admin-panel/listado']);
+        }
       },
       error => {
-        var errorMessage =  <any>error;
+        const errorMessage =  <any>error;
+
+        if (errorMessage != null){
+          this.status = 'error';
+        }
       }
     );
   }
