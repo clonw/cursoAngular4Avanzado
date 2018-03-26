@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 /** esto nos va a dar un método que nos permite recoger los valores que da una peticion ajax */
 import 'rxjs/add/operator/map';
 import { Observable} from 'rxjs/Observable';
@@ -24,5 +24,9 @@ export class AnimalService{
 
         return this._http.post(this.url + 'animal', params, {headers : headers})
                 .map(res => res.json());
+    }
+
+    getAnimals(){
+        return this._http.get(this.url + 'animals').map( res => res.json());
     }
 }
