@@ -23,6 +23,6 @@ export class AnimalService{
         });
 
         return this._http.post(this.url + 'animal', params, {headers : headers})
-                .map(res => res.json();
+                .map(res => res.json());
     }
 }
