@@ -25,7 +25,7 @@
         </p>
         <p>
             <label>Imagen del animal</label>
-            <input type="file" placeholder="Subir imagen...."/>
+            <input type="file" placeholder="Subir imagen...." (change)="fileChangeEvent($event)"/>
         </p>
 
         <input type="submit" value="Crear nuevo" class="btn btn-success"/>

@@ -21,6 +21,7 @@ export class AddComponent implements OnInit{
   public token;
   public url: string;
   public status;
+  public filesToUpload: Array<File>;
 
   constructor(
 
@@ -31,7 +32,7 @@ export class AddComponent implements OnInit{
     private _animalService: AnimalService
   ){
     this.title = 'Añadir';
-    this.animal = new Animal('', '', 2017, '', '');
+    this.animal = new Animal('', '', '', 2017, '', '');
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
@@ -52,6 +53,13 @@ export class AddComponent implements OnInit{
           this.animal = response.animal;
 
           // Subir imagen del animal
+          if (this.filesToUpload != null){
+            this._uploadService.makeFileRequest(this.url + 'upload-image-animal/' + this.animal._id,
+            [], this.filesToUpload, this.token, 'image')
+                .then((result: any) => {
+                    this.animal.image = result.image;
+                });
+          }
           this._router.navigate(['/admin-panel/listado']);
         }
       },
@@ -63,5 +71,9 @@ export class AddComponent implements OnInit{
         }
       }
     );
+  }
+
+  fileChangeEvent(fileInput: any){
+    this.filesToUpload = <Array<File>>fileInput.target.files;
   }
 }
