@@ -5,6 +5,7 @@ import {UserService } from '../../services/user.service';
 
 
 @Component({
+    // tslint:disable-next-line:component-selector
     selector: 'login',
     templateUrl: './login.component.html',
     providers: [UserService]
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit{
                     localStorage.setItem('identity', JSON.stringify(this.identity));
                     // Conseguir el token
                     this._userService.signup( this.user, 'true').subscribe(
+                        // tslint:disable-next-line:no-shadowed-variable
                         response => {
                             this.token = response.token;
 
@@ -66,7 +68,7 @@ export class LoginComponent implements OnInit{
                 const errorMessage = <any> error;
 
                 if ( errorMessage != null){
-                    let body = JSON.parse(error._body);
+                    const body = JSON.parse(error._body);
                     this.status = 'error';
                 }
             }
