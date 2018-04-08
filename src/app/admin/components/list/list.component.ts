@@ -21,6 +21,7 @@ export class ListComponent implements OnInit{
   public numbers = new Array(10);
   public animals: Animal[];
   public token;
+  public busqueda;
 
   constructor(
 
