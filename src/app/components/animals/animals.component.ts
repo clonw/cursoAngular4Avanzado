@@ -1,15 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeIn} from '../animation';
+import { Animal} from '../../models/animal';
+import { AnimalService} from '../../services/animal.service';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'animals',
   templateUrl: './animals.component.html',
+  providers: [AnimalService],
   animations: [fadeIn]
 })
 export class AnimalsComponent implements OnInit{
-  title = 'Animales';
+  public title: string;
+  public animals: [Animal];
+
+  constructor(
+    private _animalService: AnimalService
+  ){
+    this.title = 'Animales';
+  }
 
   ngOnInit(){
     console.log( 'animals.component cargado');
+    this.getAnimals();
+  }
+
+  getAnimals(){
+    this._animalService.getAnimals().subscribe(
+      response => {
+        if ( !response.animals){
+          console.log('No han llegado animalicos');
+        } else {
+          this.animals = response.animals;
+        }
+      },
+      error => {
+        console.log( <any>error);
+      }
+    );
   }
 }
