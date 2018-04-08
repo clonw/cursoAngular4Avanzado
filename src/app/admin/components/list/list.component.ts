@@ -7,29 +7,52 @@ import { Animal } from '../../../models/animal';
 import { AnimalService} from '../../../services/animal.service';
 import { UserService} from '../../../services/user.service';
 import { UploadService} from '../../../services/upload.service';
+import { User } from '../../../models/user';
 
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'admin-list',
   templateUrl: './list.component.html',
-  providers: [AnimalService]
+  providers: [AnimalService, UserService]
 })
 export class ListComponent implements OnInit{
   public title: string;
   public numbers = new Array(10);
   public animals: Animal[];
+  public token;
 
   constructor(
 
     private _route: ActivatedRoute,
     private _router: Router,
-    private _animalService: AnimalService
+    private _animalService: AnimalService,
+    private _userService: UserService
   ){
     this.title = 'Listado de animales';
+    this.token = _userService.getToken();
   }
 
   ngOnInit(){
+    this.getAnimals();
+  }
+
+  deleteAnimal(id){
+    $('#myModal-' + id).modal('hide');
+    this._animalService.deleteAnimal(this.token, id).subscribe(
+      response => {
+        if (!response.animal){
+          alert( 'error en el servidor');
+        }
+        this.getAnimals();
+      },
+      error => {
+        alert( 'error en el servidor');
+      }
+    );
+  }
+
+  getAnimals(){
     this._animalService.getAnimals().subscribe(
       response => {
         if ( !response.animals){

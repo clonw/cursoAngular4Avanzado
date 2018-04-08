@@ -22,15 +22,16 @@ export class AddComponent implements OnInit{
   public url: string;
   public status;
   public filesToUpload: Array<File>;
+  public is_edit;
 
   constructor(
-
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
     private _uploadService: UploadService,
     private _animalService: AnimalService
   ){
+    this.is_edit = false;
     this.title = 'Añadir';
     this.animal = new Animal('', '', '', 2017, '', '');
     this.identity = this._userService.getIdentity();
