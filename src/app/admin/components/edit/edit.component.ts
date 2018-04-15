@@ -7,11 +7,14 @@ import { AnimalService} from '../../../services/animal.service';
 import { UserService} from '../../../services/user.service';
 import { UploadService} from '../../../services/upload.service';
 
+import { fadeLateral} from '../../animations';
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'admin-edit',
   templateUrl: '../add/add.component.html',
-  providers: [UserService, AnimalService, UploadService]
+  providers: [UserService, AnimalService, UploadService],
+  animations: [fadeLateral]
 })
 export class EditComponent implements OnInit{
   public title = 'Editar';

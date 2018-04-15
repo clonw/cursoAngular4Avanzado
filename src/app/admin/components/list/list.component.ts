@@ -9,12 +9,14 @@ import { UserService} from '../../../services/user.service';
 import { UploadService} from '../../../services/upload.service';
 import { User } from '../../../models/user';
 
+import { fadeLateral} from '../../animations';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'admin-list',
   templateUrl: './list.component.html',
-  providers: [AnimalService, UserService]
+  providers: [AnimalService, UserService],
+  animations: [fadeLateral]
 })
 export class ListComponent implements OnInit{
   public title: string;
