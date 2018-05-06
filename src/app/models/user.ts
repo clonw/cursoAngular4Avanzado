@@ -1,6 +1,6 @@
 export class User{
     /* Con las lineas de este constructor p.e. public name: string,
-    es como si escribiera 
+    es como si escribiera
     public name : string
     constructor(name){
         this.name = name;

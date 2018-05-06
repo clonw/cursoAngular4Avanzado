@@ -1,11 +1,111 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute, Params} from '@angular/router';
+
+import { GLOBAL } from '../../../services/global';
+import { Animal } from '../../../models/animal';
+import { AnimalService} from '../../../services/animal.service';
+import { UserService} from '../../../services/user.service';
+import { UploadService} from '../../../services/upload.service';
+
+import { fadeLateral} from '../../animations';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'admin-edit',
-  templateUrl: './edit.component.html',
+  templateUrl: '../add/add.component.html',
+  providers: [UserService, AnimalService, UploadService],
+  animations: [fadeLateral]
 })
-export class EditComponent{
-  title = 'Editar';
+export class EditComponent implements OnInit{
+  public title = 'Editar';
 
+  public animal: Animal;
+  public identity;
+  public token;
+  public url: string;
+  public status;
+  public filesToUpload: Array<File>;
+  public is_edit;
+
+  constructor(
+
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _userService: UserService,
+    private _uploadService: UploadService,
+    private _animalService: AnimalService
+  ){
+    this.is_edit = true;
+    this.title = 'Editar';
+    this.animal = new Animal('', '', '', 2017, '', '');
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
+    this.url = GLOBAL.url;
+  }
+
+  ngOnInit(){
+    console.log('animal edit componente ha sido cargado !!');
+    this.getAnimal();
+  }
+
+  onSubmit(){
+
+    const id = this.animal._id;
+    this._animalService.editAnimal(this.token, id, this.animal).subscribe(
+      response => {
+        if (!response.animal){
+            this.status = 'error';
+        } else {
+          this.status = 'success';
+          this.animal = response.animal;
+
+          // Subir imagen del animal
+          if (this.filesToUpload != null){
+            this._uploadService.makeFileRequest(this.url + 'upload-image-animal/' + this.animal._id,
+            [], this.filesToUpload, this.token, 'image')
+                .then((result: any) => {
+                    this.animal.image = result.image;
+                });
+          }
+          this._router.navigate(['/animal', this.animal._id]);
+        }
+      },
+      error => {
+        const errorMessage =  <any>error;
+
+        if (errorMessage != null){
+          this.status = 'error';
+        }
+      }
+    );
+  }
+
+  fileChangeEvent(fileInput: any){
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+  }
+
+  getAnimal(){
+    this._route.params.forEach((params: Params) => {
+      const id = params['id'];
+
+      this._animalService.getAnimal(id).subscribe(
+        response => {
+
+          if (!response.animal){
+            console.log( 'no tenemos respuesta del animal ' + response);
+            this._router.navigate(['/']);
+          } else {
+            this.animal = response.animal;
+            // console.log('Recibimos el animal ' + JSON.stringify(this.animal));
+          }
+        },
+        error => {
+          console.log(<any>error);
+          this._router.navigate(['/']);
+        }
+      );
+    });
+  }
 }
+
 
